@@ -26,12 +26,9 @@ platforms:
 suites:
   - name: default
     run_list:
+      - recipe[sensu-test::windows_dependencies]
       - recipe[sensu::default]
       - recipe[sensu-test::gem_lwrp]
-    attributes:
-      sensu:
-        windows:
-          dism_source: <%= ENV['SENSU_WINDOWS_DISM_SOURCE'] %>
   - name: sysv
     run_list:
       - recipe[sensu-test]
