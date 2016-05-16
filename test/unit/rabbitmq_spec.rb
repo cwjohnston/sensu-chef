@@ -48,6 +48,34 @@ RSpec.shared_examples 'rabbitmq' do
       expect(chef_run.node["rabbitmq"]["ssl"]).to eq(false)
     end
   end
+
+  context 'general rabbitmq credentials' do
+    it 'adds rabbitmq vhost' do
+      expect(chef_run).to add_rabbitmq_vhost('sensu')
+    end
+
+    it 'adds rabbitmq user' do
+      expect(chef_run).to add_rabbitmq_user('sensu').with(
+        :password => 'password',
+        :permissions => '.* .* .*'
+      )
+    end
+
+  end
+
+  context 'with service-specific rabbitmq configuration' do
+    it 'adds service-specific rabbitmq vhost' do
+      expect(chef_run).to add_rabbitmq_vhost(server_rabbitmq_credentials['vhost'])
+    end
+
+    it 'adds service-specific rabbitmq user' do
+      expect(chef_run).to add_rabbitmq_user(server_rabbitmq_credentials['user']).with(
+        :password => server_rabbitmq_credentials['password'],
+        :permissions => server_rabbitmq_credentials['permissions']
+      )
+    end
+  end
+
 end
 
 describe "sensu::rabbitmq" do
