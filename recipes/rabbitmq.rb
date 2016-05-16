@@ -73,10 +73,13 @@ if node["sensu"]["use_ssl"]
   end
 end
 
-# The packaged erlang in 12.04 (and below) is vulnerable to
-# the poodle exploit which stops rabbitmq starting its SSL listener
-if node["platform"] == "ubuntu" && node["platform_version"] <= "12.04"
-  node.override["erlang"]["install_method"] = "esl"
+# Using Erlang VM from Erlang Solutions (ESL) repositories
+# is the recommended way of installing Erlang for running RabbitMQ.
+case node["platform_family"]
+when 'rhel'
+  include_recipe "erlang::esl" if node["platform_version"].to_i > 5 && node["sensu"]["rabbitmq"]["use_esl_erlang"]
+when 'debian'
+  include_recipe "erlang::esl" if node["sensu"]["rabbitmq"]["use_esl_erlang"]
 end
 
 include_recipe "rabbitmq"

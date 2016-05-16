@@ -36,6 +36,9 @@ default["sensu"]["add_repo"] = true
 # transport
 default["sensu"]["transport"]["reconnect_on_error"] = true
 
+# erlang for rabbitmq
+default["sensu"]["rabbitmq"]["use_esl_erlang"] = true
+
 # rabbitmq
 default["sensu"]["rabbitmq"]["host"] = "localhost"
 default["sensu"]["rabbitmq"]["port"] = 5671
