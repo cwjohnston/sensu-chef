@@ -1,3 +1,5 @@
+use_inline_resources
+
 def manage_sensu_asset(resource_action)
   attributes = Sensu::Helpers.select_attributes(
     new_resource,

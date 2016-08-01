@@ -1,3 +1,5 @@
+use_inline_resources
+
 action :create do
   definitions = Sensu::Helpers.select_attributes(
     node["sensu"],

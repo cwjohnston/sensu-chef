@@ -1,3 +1,5 @@
+use_inline_resources
+
 action :install do
   g = gem_package new_resource.name do
     gem_binary Sensu::Helpers.gem_binary

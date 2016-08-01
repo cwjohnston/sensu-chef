@@ -1,3 +1,5 @@
+use_inline_resources
+
 def load_current_resource
   @owner = new_resource.owner || node["sensu"]["admin_user"]
 

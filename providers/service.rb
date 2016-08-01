@@ -1,3 +1,5 @@
+use_inline_resources
+
 def sensu_path
   "/opt/sensu"
 end

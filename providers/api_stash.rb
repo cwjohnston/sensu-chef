@@ -1,3 +1,5 @@
+use_inline_resources
+
 def load_current_resource
   @current_resource = Chef::Resource::SensuApiStash.new(new_resource.name)
   @current_resource.api_uri(new_resource.api_uri)

@@ -1,3 +1,5 @@
+use_inline_resources
+
 action :create do
   client = Sensu::Helpers.select_attributes(
     new_resource,

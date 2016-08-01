@@ -1,3 +1,5 @@
+use_inline_resources
+
 def load_current_resource
   definition_directory = ::File.join(node["sensu"]["directory"], "conf.d", "mutators")
   @definition_path = ::File.join(definition_directory, "#{new_resource.name}.json")
