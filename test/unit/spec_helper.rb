@@ -1,5 +1,5 @@
 require 'chefspec'
-require 'chefspec/librarian'
+require 'batali/chefspec'
 
 ChefSpec::Coverage.start!
 
