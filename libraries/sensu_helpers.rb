@@ -158,6 +158,7 @@ module Sensu
       # @param [String] Sensu version string
       # @param [String] Platform version
       # @param [String,NilClass] Suffix to override default '.elX'
+      # @return [String] RPM package version string
       def redhat_version_string(sensu_version, platform_version, suffix_override = nil)
         bare_version = sensu_version.split('-').first
         if Gem::Version.new(bare_version) < Gem::Version.new('0.27.0')
