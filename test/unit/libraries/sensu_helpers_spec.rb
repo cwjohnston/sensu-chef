@@ -1,5 +1,6 @@
 require 'rspec'
 require 'fauxhai'
+
 require_relative '../../../libraries/sensu_helpers.rb'
 
 describe Sensu::Helpers do
@@ -95,6 +96,25 @@ describe Sensu::Helpers do
           expect(gem_binary).to eq('gem')
         end
       end
+    end
+  end
+
+  describe ".repo_codename" do
+    it "returns expected repo codename for known releases" do
+      {
+        "wheezy"  => "wheezy",
+        "jessie"  => "jessie",
+        "precise" => "precise",
+        "trusty"  => "trusty",
+        "wily"    => "xenial",
+        "xenial"  => "xenial",
+        "yakkety" => "xenial",
+      }.each_pair do |codename, expected_codename|
+        expect(Sensu::Helpers.repo_codename(codename)).to eq(expected_codename)
+      end
+    end
+    it "raises an exception when provided an unknown codename" do
+      expect { Sensu::Helpers.repo_codename("dory") }.to raise_error(NameError)
     end
   end
 

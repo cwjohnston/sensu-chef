@@ -128,6 +128,29 @@ module Sensu
         end
       end
 
+      # Sensu packages for Ubuntu target LTS releases, but are
+      # typically expected to be functional on non-LTS releases as
+      # well. Right now this compatability boils down to libc version
+      # and the use of systemd init.
+      #
+      # This method returns the Sensu repo codename thought to
+      # be compatible with a given codename.
+      #
+      # @param [String] Ubuntu or Debian release codename
+      # @return [String] Ubuntu LTS release codename
+      def repo_codename(codename)
+        case codename
+        when "jessie","wheezy"
+          codename
+        when "precise","trusty","xenial"
+          codename
+        when "wily","yakkety"
+          "xenial"
+        else
+          raise NameError.new("Can't find Sensu repo codename for '#{codename}'")
+        end
+      end
+
       # Derives Sensu package version strings for Redhat platforms.
       # When the desired Sensu version is '0.27.0' or later, the package
       # requires a '.elX' suffix.
